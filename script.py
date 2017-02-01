@@ -3,9 +3,9 @@ import geojson
 import math
 from area import area
 
-# for cars
+# for cars day
 
-file_name = 'cars_GeoCoo.json'
+file_name = 'Yarvalcars_day_GeoCoo.json'
 
 with open(file_name) as infile:
     json_file = json.load(infile)
@@ -21,7 +21,7 @@ for row in json_file:
 	coos.append((row['d']['lon'], row['d']['lat']))
 	coos.append((row['a']['lon'], row['a']['lat']))
 	current_geometry = geojson.Polygon([coos])
-	print current_geometry
+	# print current_geometry
 	current_area = area(current_geometry)
 	my_feature_collection["features"].append(geojson.Feature(geometry=current_geometry, properties={
                                              "area": current_area}))
