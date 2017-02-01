@@ -3,9 +3,9 @@ import geojson
 import math
 from area import area
 
-# for houses
+# for roads
 
-file_name = 'housesGeo.json'
+file_name = 'roadsGeo.json'
 
 with open(file_name) as infile:
     json_file = json.load(infile)
