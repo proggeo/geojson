@@ -3,33 +3,31 @@ import geojson
 import math
 from area import area
 
-# for trees
+# for cars
 
-file_name = 'trees_GeoCoo.json'
+file_name = 'cars_GeoCoo.json'
 
 with open(file_name) as infile:
     json_file = json.load(infile)
 
-# print json_file
-
-# help(geojson.FeatureCollection)
-
 my_feature_collection = geojson.FeatureCollection([])
 
 for row in json_file:
-    current_geometry = geojson.Point((row['lon'], row['lat']))
-    current_area = area(current_geometry)
-    current_area = math.pi * row['radius'] ** 2
-    my_feature_collection["features"].append(geojson.Feature(geometry=current_geometry, properties={
-                                             "radius": row['radius'], "area": current_area}))
+	# print row
+	coos = []
+	coos.append((row['a']['lon'], row['a']['lat']))
+	coos.append((row['b']['lon'], row['b']['lat']))
+	coos.append((row['c']['lon'], row['c']['lat']))
+	coos.append((row['d']['lon'], row['d']['lat']))
+	coos.append((row['a']['lon'], row['a']['lat']))
+	current_geometry = geojson.Polygon([coos])
+	print current_geometry
+	current_area = area(current_geometry)
+	my_feature_collection["features"].append(geojson.Feature(geometry=current_geometry, properties={
+                                             "area": current_area}))
 
 
-# current_feature = geojson.Feature(geometry = geojson.Polygon([[(0,0),(1,1)]]))
-
-# my_feature_collection["features"].append(current_feature)
-# my_feature_collection["features"].append(current_feature)
-
-# print my_feature_collection
+print my_feature_collection
 
 print geojson.dumps(my_feature_collection)
 
