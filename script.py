@@ -3,6 +3,8 @@ import geojson
 import math
 from area import area
 
+# for trees
+
 file_name = 'trees_GeoCoo.json'
 
 with open(file_name) as infile:
