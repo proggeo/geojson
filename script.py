@@ -3,9 +3,9 @@ import geojson
 import math
 from area import area
 
-# for cars day
+# for cars night
 
-file_name = 'Yarvalcars_day_GeoCoo.json'
+file_name = 'Yarvalcars_night_GeoCoo.json'
 
 with open(file_name) as infile:
     json_file = json.load(infile)
