@@ -3,28 +3,28 @@ import geojson
 import math
 from area import area
 
-# for cars night
+# for first floor
 
-file_name = 'Yarvalcars_night_GeoCoo.json'
+file_name = 'firstFloorFunctionGeo.json'
 
 with open(file_name) as infile:
     json_file = json.load(infile)
 
 my_feature_collection = geojson.FeatureCollection([])
 
+floor_functions = ["office", "cafe", "garage", "culture", "housing","ruin"]
+
 for row in json_file:
-	# print row
+	print row[1]
+	floor_function = floor_functions[row[0]]
 	coos = []
-	coos.append((row['a']['lon'], row['a']['lat']))
-	coos.append((row['b']['lon'], row['b']['lat']))
-	coos.append((row['c']['lon'], row['c']['lat']))
-	coos.append((row['d']['lon'], row['d']['lat']))
-	coos.append((row['a']['lon'], row['a']['lat']))
+	for point in row[1]:
+		coos.append((point['lng'], point['lat']))
 	current_geometry = geojson.Polygon([coos])
 	# print current_geometry
 	current_area = area(current_geometry)
 	my_feature_collection["features"].append(geojson.Feature(geometry=current_geometry, properties={
-                                             "area": current_area}))
+                                             "function": floor_function ,"area": current_area}))
 
 
 print my_feature_collection
